@@ -27,6 +27,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
+  overflow-x: hidden;
 }
 
 a {
@@ -51,6 +52,7 @@ img {
   background: rgba(255, 255, 255, 0.88);
   border-bottom: 1px solid rgba(220, 227, 238, 0.85);
   backdrop-filter: blur(18px);
+  animation: slideDown 520ms ease both;
 }
 
 .brand {
@@ -146,6 +148,7 @@ img {
   font-size: clamp(42px, 6.4vw, 78px);
   line-height: 0.98;
   letter-spacing: 0;
+  animation: fadeLift 720ms ease 80ms both;
 }
 
 .microcopy,
@@ -164,6 +167,7 @@ img {
   color: var(--muted);
   font-size: 19px;
   line-height: 1.65;
+  animation: fadeLift 720ms ease 180ms both;
 }
 
 .hero-actions {
@@ -171,6 +175,7 @@ img {
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 32px;
+  animation: fadeLift 720ms ease 260ms both;
 }
 
 .hero-proof {
@@ -178,6 +183,7 @@ img {
   flex-wrap: wrap;
   gap: 14px;
   margin-top: 34px;
+  animation: fadeLift 720ms ease 340ms both;
 }
 
 .hero-proof span {
@@ -204,6 +210,7 @@ img {
   border-radius: 8px;
   background: var(--sky);
   box-shadow: var(--shadow);
+  animation: mediaFloat 850ms ease 180ms both;
 }
 
 .hero-media img {
@@ -211,6 +218,115 @@ img {
   height: 100%;
   min-height: 560px;
   object-fit: cover;
+  transition: transform 700ms ease;
+}
+
+.hero-media:hover img {
+  transform: scale(1.035);
+}
+
+.video-showcase {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  padding: 28px 0 96px;
+}
+
+.video-copy p:last-child {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.video-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: var(--navy);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+
+.video-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-details {
+  padding: 6px 0 104px;
+}
+
+.details-heading {
+  display: grid;
+  grid-template-columns: 1fr minmax(280px, 500px);
+  gap: 32px;
+  align-items: end;
+  margin-bottom: 34px;
+}
+
+.details-heading p:last-child {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.detail-gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.detail-card {
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.detail-card:hover,
+.problem-strip article:hover,
+.benefit-list article:hover,
+.review-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(8, 119, 255, 0.36);
+  box-shadow: 0 18px 46px rgba(5, 29, 66, 0.1);
+}
+
+.detail-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  transition: transform 520ms ease;
+}
+
+.detail-card:hover img {
+  transform: scale(1.045);
+}
+
+.detail-card h3 {
+  margin: 20px 20px 8px;
+}
+
+.detail-card p {
+  margin: 0 20px 22px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.reveal-item {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 640ms ease, transform 640ms ease;
+}
+
+.reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .problem {
@@ -606,6 +722,7 @@ h3 {
   cursor: pointer;
   box-shadow: 0 18px 44px rgba(8, 119, 255, 0.28);
   transition: transform 180ms ease, box-shadow 180ms ease;
+  animation: iconPulse 2400ms ease-in-out infinite;
 }
 
 .floating-button:hover {
@@ -770,8 +887,10 @@ h3 {
   }
 
   .hero,
+  .video-showcase,
   .problem-grid,
   .solution,
+  .details-heading,
   .faq,
   .support,
   .cta-panel {
@@ -792,7 +911,8 @@ h3 {
   }
 
   .problem-strip,
-  .reviews-grid {
+  .reviews-grid,
+  .detail-gallery {
     grid-template-columns: 1fr;
   }
 
@@ -883,7 +1003,56 @@ h3 {
   *,
   *::before,
   *::after {
+    animation: none !important;
     scroll-behavior: auto !important;
     transition: none !important;
+  }
+
+  .reveal-item {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeLift {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mediaFloat {
+  from {
+    opacity: 0;
+    transform: translateX(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
   }
 }

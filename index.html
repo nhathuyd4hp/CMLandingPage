@@ -13,12 +13,14 @@
 <body>
   <header class="site-header" aria-label="Điều hướng chính">
     <a class="brand" href="#top" aria-label="CoolMate Sport">
-      <img alt="Logo Coolmate" width="90" height="50" decoding="async" data-nimg="1" class="min-w-[90px]"
-        style="color:transparent" src="./assets/logo.png">
+      <span class="brand-mark">CM</span>
+      <span>CoolMate Sport</span>
     </a>
     <nav class="nav-links" aria-label="Các phần trên trang">
       <a href="#problem">Nỗi lo</a>
       <a href="#solution">Công nghệ</a>
+      <a href="#video">Video</a>
+      <a href="#details">Chi tiết</a>
       <a href="#reviews">Đánh giá</a>
       <a href="#faq">FAQ</a>
       <a href="#support">Hỗ trợ</a>
@@ -47,6 +49,20 @@
       </div>
       <div class="hero-media" aria-label="Hình ảnh vận động viên mặc áo thể thao CoolMate">
         <img src="./assets/coolmate-hero.jpg" alt="Vận động viên đang bứt tốc trong áo thể thao xanh trắng" />
+      </div>
+    </section>
+
+    <section class="video-showcase section-shell reveal-item" id="video" data-reveal>
+      <div class="video-copy">
+        <h2>Nhìn cách COOLMATE chuyển động cùng cơ thể</h2>
+        <p>
+          Một đoạn motion ngắn mô phỏng lớp vải thoát ẩm, độ co giãn và cảm giác nhẹ khi vận động
+          ở cường độ cao.
+        </p>
+      </div>
+      <div class="video-frame">
+        <video src="./assets/video ai.mp4" poster="./assets/product-detail-fabric.jpg" autoplay muted loop playsinline
+          controls></video>
       </div>
     </section>
 
@@ -125,6 +141,41 @@
       </div>
     </section>
 
+    <section class="product-details section-shell" id="details">
+      <div class="details-heading reveal-item" data-reveal>
+        <div>
+          <p class="section-kicker">Chi tiết sản phẩm</p>
+          <h2>Cận cảnh những điểm khiến áo khác biệt</h2>
+        </div>
+        <p>
+          Từ cấu trúc bề mặt vải đến độ co giãn và bảng màu, mỗi chi tiết đều được tối ưu cho
+          người tập cần sự khô thoáng nhưng vẫn muốn mặc đẹp.
+        </p>
+      </div>
+      <div class="detail-gallery">
+        <article class="detail-card reveal-item" data-reveal>
+          <img src="./assets/product-detail-fabric.jpg" alt="Chi tiết bề mặt vải COOLMATE thoáng khí" />
+          <h3>Bề mặt thoáng khí</h3>
+          <p>Cấu trúc sợi mở giúp hơi ẩm di chuyển nhanh khỏi da.</p>
+        </article>
+        <article class="detail-card reveal-item" data-reveal>
+          <img src="./assets/product-detail-stretch.jpg" alt="Chi tiết áo thể thao co giãn bốn chiều" />
+          <h3>Co giãn theo chuyển động</h3>
+          <p>Vai, ngực và thân áo linh hoạt khi chạy, nâng tạ hoặc HIIT.</p>
+        </article>
+        <article class="detail-card reveal-item" data-reveal>
+          <img src="./assets/product-detail-dry.jpg" alt="Chi tiết công nghệ nhanh khô của áo thể thao" />
+          <h3>Nhanh khô sau buổi tập</h3>
+          <p>Bề mặt phân tán độ ẩm, giảm cảm giác nặng áo.</p>
+        </article>
+        <article class="detail-card reveal-item" data-reveal>
+          <img src="./assets/product-detail-colors.jpg" alt="Bảng màu áo thể thao CoolMate" />
+          <h3>Bảng màu dễ phối</h3>
+          <p>Các màu athletic sạch, dễ mặc từ phòng tập đến ngày thường.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="social-proof" id="reviews">
       <div class="section-shell">
         <div class="proof-heading">
@@ -197,7 +248,7 @@
     <section class="support section-shell" id="support">
       <div class="support-copy">
         <p class="section-kicker">Hỗ trợ nhanh</p>
-        <h2>Cần chọn size hay hỏi chính sách?</h2>
+        <h2>Cần chọn size hay hỏi chính sách? AI Chatbot luôn sẵn sàng</h2>
         <p>
           Nhắn tin trực tiếp để được gợi ý size, xem ưu đãi, hỏi đổi trả hoặc kết nối nhân viên
           tư vấn khi bạn cần câu trả lời chi tiết hơn.
