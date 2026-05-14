@@ -1769,6 +1769,7 @@ body {
   gap: 4px;
   margin-bottom: 16px;
   text-align: center;
+  justify-content: center;
 }
 
 .price-box span {
