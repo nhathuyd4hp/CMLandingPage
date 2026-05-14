@@ -103,6 +103,104 @@ chatForm.addEventListener("submit", (event) => {
 });
 
 const revealItems = document.querySelectorAll("[data-reveal]");
+const showcaseVideo = document.querySelector(".video-frame video");
+
+const orderModal = document.querySelector("[data-order-modal]");
+const orderModalCloseButtons = document.querySelectorAll("[data-order-modal-close]");
+const orderTriggers = document.querySelectorAll("[data-order-trigger]");
+const orderForm = document.querySelector("[data-order-form]");
+const orderFormError = document.querySelector("[data-order-form-error]");
+const orderFormSuccess = document.querySelector("[data-order-form-success]");
+let lastActiveElement = null;
+
+function setOrderModalOpen(isOpen) {
+  if (!orderModal) {
+    return;
+  }
+
+  if (isOpen) {
+    lastActiveElement = document.activeElement;
+    orderModal.hidden = false;
+    document.body.style.overflow = "hidden";
+
+    if (orderFormError) {
+      orderFormError.hidden = true;
+    }
+    if (orderFormSuccess) {
+      orderFormSuccess.hidden = true;
+    }
+
+    const firstFocusable = orderModal.querySelector(
+      'a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (firstFocusable) {
+      firstFocusable.focus();
+    }
+    return;
+  }
+
+  orderModal.hidden = true;
+  document.body.style.overflow = "";
+  if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+    lastActiveElement.focus();
+  }
+}
+
+if (orderModal && orderTriggers.length) {
+  orderTriggers.forEach((trigger) => {
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      setOrderModalOpen(true);
+    });
+  });
+
+  orderModalCloseButtons.forEach((button) => {
+    button.addEventListener("click", () => setOrderModalOpen(false));
+  });
+
+  orderModal.addEventListener("click", (event) => {
+    if (event.target === orderModal) {
+      setOrderModalOpen(false);
+    }
+  });
+
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !orderModal.hidden) {
+      setOrderModalOpen(false);
+    }
+  });
+}
+
+if (orderForm) {
+  orderForm.addEventListener("input", () => {
+    if (orderFormError) {
+      orderFormError.hidden = true;
+    }
+  });
+
+  orderForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!orderForm.checkValidity()) {
+      if (orderFormSuccess) {
+        orderFormSuccess.hidden = true;
+      }
+      if (orderFormError) {
+        orderFormError.hidden = false;
+      }
+      return;
+    }
+
+    if (orderFormError) {
+      orderFormError.hidden = true;
+    }
+    if (orderFormSuccess) {
+      orderFormSuccess.hidden = false;
+    }
+
+    orderForm.reset();
+  });
+}
 
 if ("IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
@@ -121,6 +219,30 @@ if ("IntersectionObserver" in window) {
     item.style.transitionDelay = `${Math.min(index * 70, 280)}ms`;
     revealObserver.observe(item);
   });
+
+  if (showcaseVideo) {
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const playResult = showcaseVideo.play();
+            if (playResult && typeof playResult.catch === "function") {
+              playResult.catch(() => { });
+            }
+          } else {
+            showcaseVideo.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    videoObserver.observe(showcaseVideo);
+  }
 } else {
   revealItems.forEach((item) => item.classList.add("is-visible"));
+
+  if (showcaseVideo) {
+    // Fallback: keep video running if IntersectionObserver is unavailable.
+  }
 }
